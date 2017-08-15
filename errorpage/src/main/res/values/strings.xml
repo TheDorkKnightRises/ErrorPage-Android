@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">ErrorPage</string>
+    <string name="report">Report error</string>
+    <string name="close_app">Close app</string>
+</resources>
