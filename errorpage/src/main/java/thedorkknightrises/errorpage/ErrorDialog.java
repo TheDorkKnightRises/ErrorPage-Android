@@ -3,22 +3,19 @@ package thedorkknightrises.errorpage;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
-import android.content.Intent;
-import android.os.Bundle;
 import android.util.Log;
-import android.view.Display;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.webkit.WebView;
 import android.widget.Button;
 
-public class ErrorActivity extends Dialog {
+
+public class ErrorDialog extends Dialog {
     WebView errorView;
     Button reportButton, closeButton;
     Context context;
 
-    public ErrorActivity(Context c) {
+    public ErrorDialog(Context c) {
         super(c, ViewGroup.LayoutParams.MATCH_PARENT);
         this.context = c;
 
@@ -40,28 +37,37 @@ public class ErrorActivity extends Dialog {
         });
     }
 
-    public ErrorActivity setError(String error) {
+    public ErrorDialog setError(String error) {
         errorView.loadData(error, "text/html", null);
         return this;
     }
 
-    public ErrorActivity setError(String error, String mimeType, String encoding) {
+    public ErrorDialog setError(String error, String mimeType, String encoding) {
         errorView.loadData(error, mimeType, encoding);
         return this;
     }
 
-    public ErrorActivity setException(Exception error) {
+    public ErrorDialog setException(Exception error) {
         String errorText = Log.getStackTraceString(error);
         errorView.loadData(errorText, "text/html", null);
         return this;
     }
 
-    public ErrorActivity setOnReportButtonClickListener(View.OnClickListener onReportButtonClickListener) {
+    public ErrorDialog setReportButtonVisibility(boolean visible) {
+        if (visible) {
+            reportButton.setVisibility(View.VISIBLE);
+        } else {
+            reportButton.setVisibility(View.GONE);
+        }
+        return this;
+    }
+
+    public ErrorDialog setOnReportButtonClickListener(View.OnClickListener onReportButtonClickListener) {
         reportButton.setOnClickListener(onReportButtonClickListener);
         return this;
     }
 
-    public ErrorActivity setOnCloseButtonClickListener(View.OnClickListener onCloseButtonClickListener) {
+    public ErrorDialog setOnCloseButtonClickListener(View.OnClickListener onCloseButtonClickListener) {
         closeButton.setOnClickListener(onCloseButtonClickListener);
         return this;
     }
